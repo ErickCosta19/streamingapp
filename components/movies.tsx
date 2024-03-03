@@ -6,8 +6,9 @@ import { Input } from './ui/input';
 
 export async function getMovies(search: string) {
     console.log(search)
-    const data = await fetch (`http://www.omdbapi.com/?s=${search}&per_page=10&apiKey=e605ff67`)
+    const data = await fetch (`https://www.omdbapi.com/?s=${search}&per_page=10&apiKey=e605ff67`)
     const movies = await data.json()
+    console.log(movies)
     return movies.Search
   }
   
@@ -16,6 +17,7 @@ interface Movie {
     Year: string;
     Rated: string;
     Released: string;
+    imdbID: string
 }
 
 
@@ -42,7 +44,7 @@ export function Movies() {
             </div>
             <ul>
                 {movies.map(movie => (
-                    <li key={movie.Title}>
+                    <li key={movie.imdbID}>
                         {movie.Title}
                     </li>
                 ))}
