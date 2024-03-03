@@ -1,4 +1,4 @@
-import { Client } from "@/components/client"
+import { Movies } from "@/components/movies"
 
 
 
@@ -10,7 +10,7 @@ export default async function PageMovies(){
       <h1 className="text-4xl">
         Movies
       </h1>
-      <Client/>
+      <Movies/>
     </main>
   )
 }

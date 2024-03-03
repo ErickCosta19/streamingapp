@@ -1,5 +1,8 @@
 'use client';
 import { useState, useEffect, ChangeEvent } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
 
 export async function getMovies(search: string) {
     console.log(search)
@@ -16,12 +19,13 @@ interface Movie {
 }
 
 
-export function Client() {
+export function Movies() {
     const [search, setSearch] = useState('');
+    const [movies, setMovies] = useState<Movie[]>([]);
   
     async function handleSearch() {
         const result = await getMovies(search)
-        console.log(result)
+        setMovies(result)
     }
      
     function handleInputSearch(event: ChangeEvent<HTMLInputElement>) {
@@ -32,8 +36,17 @@ export function Client() {
     return (
         <div>
             <h1>Digite para pesquisar</h1>
-            <input type='text' name='search' value={search} onChange={handleInputSearch} className='bg-neutral'/>
-            <button onClick={handleSearch}>Pesquisar</button>
+            <div className='flex flex-row items-center gap-2 max-w-[500px]'>
+                <Input type='text' name='search' value={search} onChange={handleInputSearch} className='bg-neutral'/>
+                <Button onClick={handleSearch}>Pesquisar</Button>
+            </div>
+            <ul>
+                {movies.map(movie => (
+                    <li key={movie.Title}>
+                        {movie.Title}
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
